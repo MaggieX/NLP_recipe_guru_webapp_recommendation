@@ -1,0 +1,29 @@
+<a href="#" class="myButton">Recommend Me Recipes!!</a>
+
+.myButton {
+	box-shadow:inset 1px 0px 26px 9px #b8f582;
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	background-color:#89c403;
+	border-radius:6px;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:21px;
+	font-weight:bold;
+	font-style:italic;
+	padding:18px 64px;
+	text-decoration:none;
+	text-shadow:1px -2px 36px #120a80;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	background-color:#77a809;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
