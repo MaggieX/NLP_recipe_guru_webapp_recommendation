@@ -19,9 +19,6 @@ Werkzeug==1.0.1
 wincertstore==0.2
 altair==4.1.0
 flask-assets
-flask-whooshalchemy
-elasticsearch
-sqlalchemy
 numpy==1.18.0
 cython==0.29.17
 scipy==1.2.3
