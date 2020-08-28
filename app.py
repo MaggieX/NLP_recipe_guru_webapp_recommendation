@@ -26,19 +26,17 @@ with open("model/top10_d2v_similarity.pickle", 'rb') as f:
   d2v_sim = pickle.load(f)
 
 # cleaned recipe dataframe with 18000 entries
-with open("model/df.pickle", 'rb') as file:
+with open("model/bow_recipes.pickle", 'rb') as file:
   df_bow = pickle.load(file)
 
-with open("model/recipes_df_d2v.pickle", 'rb') as file:
+with open("model/d2v_recipes.pickle", 'rb') as file:
   df_d2v = pickle.load(file)
 
 ############## Load Cosine Similarities #################
 sim_matrix_bow = np.squeeze(np.asarray(bow_sim['cosine_similarities'].todense()))
-print(sim_matrix_bow.shape)
 ids_bow = bow_sim['ids']
 
 sim_matrix_d2v = np.squeeze(np.asarray(d2v_sim['cosine_similarities'].todense()))
-print(sim_matrix_bow.shape)
 ids_d2v = d2v_sim['ids']
 
 ################### sqlalchemy ####################
