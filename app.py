@@ -17,12 +17,13 @@ from scipy.sparse import coo_matrix
 
 ############## Load Models & data ################
 # similarity matrix from bag of words
-with open("model/top10_BoW_similarity.pickle", 'rb') as f:
+# with open("model/top10_BoW_similarity.pickle", 'rb') as f:
+with open("model/top10_bow_rec_dict.pickle", 'rb') as f:
   bow_sim = pickle.load(f)
 
 # sim matrix from doc2vec
 # with open("model/doc2vec_similarity_mat.pickle", 'rb') as f:
-with open("model/top10_d2v_similarity.pickle", 'rb') as f:
+with open("model/top10_d2v_rec_dict.pickle", 'rb') as f:
   d2v_sim = pickle.load(f)
 
 # cleaned recipe dataframe with 18000 entries
@@ -33,10 +34,12 @@ with open("model/d2v_recipes.pickle", 'rb') as file:
   df_d2v = pickle.load(file)
 
 ############## Load Cosine Similarities #################
-sim_matrix_bow = np.squeeze(np.asarray(bow_sim['cosine_similarities'].todense()))
+# sim_matrix_bow = np.squeeze(np.asarray(bow_sim['cosine_similarities'].todense()))
+sim_matrix_bow = bow_sim['cosine_similarities']
 ids_bow = bow_sim['ids']
 
-sim_matrix_d2v = np.squeeze(np.asarray(d2v_sim['cosine_similarities'].todense()))
+# sim_matrix_d2v = np.squeeze(np.asarray(d2v_sim['cosine_similarities'].todense())) # if load "top10_d2v_similarity.pickle"
+sim_matrix_d2v = d2v_sim['cosine_similarities']
 ids_d2v = d2v_sim['ids']
 
 ################### sqlalchemy ####################
