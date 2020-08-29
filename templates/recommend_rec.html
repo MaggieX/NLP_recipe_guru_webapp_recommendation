@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Recipe Guru</title>
+
+    <!-- CSS Plugins -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+
+    <link rel="stylesheet" href="static/assets/plugins/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="static/assets/plugins/lightbox/css/lightbox.min.css" />
+    <link rel="stylesheet" href="static/assets/plugins/flickity/flickity.min.css" />
+    <link rel="stylesheet" href="static/assets/buttons/scssbuttons.css" />
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="static/assets/css/theme.min.css" />
+
+
+    <!-- Button style-->
+    <style>
+        button {
+            display: inline-block;
+            background-color: #355c7D;
+            border-radius: 10px;
+            border: 4px double #cccccc;
+            color: #ffffff;
+            text-align: center;
+            font-size: 18px;
+            padding: 20px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        button:hover {
+            background-color: #6c5B7B;
+        }
+
+        button:hover span {
+            padding-right: 25px;
+        }
+
+        button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        .button_reset {
+            background-color: #c06c84;
+        }
+
+        .button_refresh {
+            background-color: #f67280;
+            width: 150 px
+        }
+
+        .button_back {
+            background-color: #f8b195;
+            width: 150 px
+        }
+
+        input.larger {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR
+        ================================================== -->
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <!-- Navbar: Brand -->
+            <a class="navbar-brand navbar-brand_2 d-lg-none" href="/main">Recipe Ideas</a>
+
+            <!-- Navbar: Toggler -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar: Collapse -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Navbar navigation: Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"></li>
+                    <a class="navbar-brand logo" href="/main"><img src="static/assets/img/logo/logo1.jpg" alt="logo"
+                            class="img-responsive logo"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://maggiex.github.io">About Me</a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="nav-item__menu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Explore Recipes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="nav-item__menu">
+                            <a class="dropdown-item active" href="nutrition.html">By Nutrition</a>
+                            <a class="dropdown-item" href="cuisine_type.html">By Cuisine Type</a>
+                            <a class="dropdown-item" href="/explore">Under the hood (Machine Learning)</a>
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                <!-- Webpage name -->
+                <a class="navbar-brand navbar-brand_2 d-none d-lg-flex" href="/main">
+                    Recipe Guru -- Personal Recipe Recommender
+                </a>
+
+                <!-- Navbar navigation: Right -->
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.epicurious.com/">Recipe Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/zhuyun-maggie-xiao/">Contact</a>
+                    </li>
+                </ul>
+
+            </div> <!-- / .navbar-collapse -->
+
+        </div> <!-- / .container -->
+    </nav> <!-- / .navbar -->
+
+    <!-- HEADER
+        ================================================== -->
+    <section class="section section_header" data-parallax="scroll" data-image-src="static/assets/img/17.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <!-- Heading -->
+                    <h1 class="section__heading section_header__heading text-center">
+                        Here are what we recommend based on your interests ...
+                    </h1>
+
+                </div>
+            </div> <!-- / .row -->
+        </div> <!-- / .container -->
+    </section>
+
+    <form method="POST">
+        <!--action -"#"-->
+        <!-- MENU
+    	================================================== -->
+        <section class="section section_menu section_border_bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <!-- Heading -->
+                        <h2 class="section__heading text-center">
+                            Recommendations
+                        </h2>
+                        <p class="section__subheading text-center">
+                            Here are the recipes recommendations based on your favorites.
+                        </p>
+
+                    </div>
+                </div> <!-- / .row -->
+                <div class="row">
+                    <div class="col">
+
+
+                    </div>
+                </div>
+                <div class="row section_menu__grid" id="menu_images">
+
+                    <div class="col-md-6 section_menu__grid__item">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo2.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[0][0] }}</h4>
+                                    <p>
+                                        <a href={{ rec[0][1] }}> Show this recipe </a>
+
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe0" value={{ rec[0][2] }}
+                                            name="recipe_checkbox" />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 section_menu__grid__item">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo2.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[1][0] }}</h4>
+                                    <p>
+                                        <a href={{ rec[1][1] }}> Show this recipe </a>
+
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe1" name="recipe_checkbox"
+                                            value={{ rec[1][2]}} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 section_menu__grid__item dinner">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo1.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[2][0]}}</h4>
+                                    <p>
+                                        <a href={{ rec[2][1] }}> Show this recipe </a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe2" name="recipe_checkbox"
+                                            value={{ rec[2][2]}} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 section_menu__grid__item drinks">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo1.jpg" alt="..." style="opacity: 0.3;" />
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[4][0]}}</h4>
+                                    <p>
+                                        <a href={{ rec[3][1] }}>Show this recipe</a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe4" name="recipe_checkbox"
+                                            value={{rec[3][2]}} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- / .row -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 section_menu__grid__item drinks">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo3.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[4][0]}}</h4>
+                                    <p>
+                                        <a href={{ rec[4][1] }}>Show this recipe</a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe4" name="recipe_checkbox"
+                                            value={{ rec[4][2] }} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 section_menu__grid__item dinner">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo3.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[5][0] }}</h4>
+                                    <p>
+                                        <a href={{rec[5][1]}}>Show this recipe</a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe5" name="recipe_checkbox"
+                                            value={{ rec[5][2] }} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 section_menu__grid__item lunch">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo1.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[6][0] }}</h4>
+                                    <p>
+                                        <a href={{ rec[6][1] }}>Show this recipe</a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe7" name="recipe_checkbox"
+                                            value={{ rec[6][2] }} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 section_menu__grid__item lunch">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo1.jpg" alt="..." style="opacity: 0.3;" />
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[7][0] }}</h4>
+                                    <p> <a href={{ rec[7][1] }}>Show this recipe</a></p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe7" name="recipe_checkbox"
+                                            value={{rec[7][2]}} />
+                                        <label for="recipe_checkbox"> I like this! </label><br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- / .row -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 section_menu__grid__item dinner">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo2.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[8][0] }}</h4>
+                                    <p>
+                                        <a href={{ rec[8][1] }}> Show this recipe </a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe8" name="recipe_checkbox"
+                                            value={{ rec[8][2] }}>
+                                        <label for="recipe_checkbox"> I like this! </label><br>
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 section_menu__grid__item drinks">
+                        <div class="section_menu__item">
+                            <div class="row">
+                                <div class="col-3 align-self-center">
+                                    <div class="section_menu__item__img">
+                                        <img src="static/assets/img/logo/logo2.jpg" alt="..." style="opacity: 0.3;">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <h4>{{ rec[9][0]}}</h4>
+                                    <p>
+                                        <a href={{ rec[9][1] }}> Show this recipe</a>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <div class="text-center">
+                                        <input type="checkbox" class="larger" id="recipe9" name="recipe_checkbox"
+                                            value={{ rec[9][2] }}>
+                                        <label for="recipe_checkbox"> I like this! </label><br>
+                                    </div>
+                                </div>
+                            </div> <!-- / .row -->
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <button type="button" class="button button_back" onclick="history.back()"> My Previous
+                        Selections</button>
+
+                    <button type="button" class="button button_refresh"
+                        onClick="window.location.href=window.location.href">
+                        Other recipe collections
+                    </button>
+
+                    <button class="button button_reset" type="reset">Uncheck all</button>
+
+                    <button class="button">
+                        <span style='font-size:25px;'> &#127869 Recommend Recipes &#127869</span>
+                    </button>
+
+
+
+    </form>
+
+
+
+    </div> <!-- / .row -->
+    </div> <!-- / .container -->
+    </section>
+
+    <!-- DISHES
+    	================================================== -->
+    <section class="section section_dishes">
+
+        <!-- Header -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <!-- Heading -->
+                    <h2 class="section__heading text-center">
+                        Featured dishes
+                    </h2>
+
+                    <!-- Subheading -->
+                    <p class="section__subheading text-center">
+                        Some popular recipes .. (TBD)
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- FOOTER
+            ================================================== -->
+    <footer class="section section_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <!-- About Me -->
+                    <h5 class="section_footer__heading">
+                        About Me
+                    </h5>
+                    <p style="color:rgb(173, 170, 170);">
+                        Hi! I am Maggie, a PhD student based in LA. Probably like you, I love
+                        exploring new food. During shutdown, my friends and I are searching
+                        for cooking ideas that can be turned into our next meal. This was the
+                        motivation of creating this recipe recommendation website -- to make
+                        your next meal planning experience more like a serendipity.
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <!-- Contact info -->
+                    <h5 class="section_footer__heading">
+                        Contact info
+                    </h5>
+                    <ul class="section_footer__info" style="color:white;">
+                        <li>
+                            <i class="far fa-envelope"></i>
+                            <a href="mailto:zhuyun.xiao@mg.thedataincubator.com"
+                                style="color:white;">zhuyun.xiao@mg.thedataincubator.com</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/zhuyun-maggie-xiao/"
+                                style="color:white;">zhuyun-maggie-xiao</a>
+                        </li>
+
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://www.thedataincubator.com/fellowship.html" style="color:white;">
+                                The Data Incubator Fellowship, San Francisco Cohort</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <!-- Opening hours -->
+                    <h5 class="section_footer__heading">
+                        Recipe Sources
+                    </h5>
+                    <div class="section_sources">
+                        <div class="section_data_1">
+                            <a href="http://pic2recipe.csail.mit.edu/"> Recipe 1M+ (MIT) </a>
+                        </div>
+                        <div class="section_data_2">
+                            <a href="https://www.foodnetwork.com/"> Food Network </a>
+                        </div>
+                        <div class="section_data_2">
+                            <a href="https://www.epicurious.com/"> Epicurious </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / .row -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- Copyright -->
+                    <div class="section_footer__copyright">
+                        &copy; <span id="js-current-year"></span> Recipe Guru. All rights
+                        reserved.
+                    </div>
+                </div>
+            </div>
+            <!-- / .row -->
+        </div>
+        <!-- / .container -->
+    </footer>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- JAVASCRIPT
+        ================================================== -->
+
+    <!-- JS Global -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS Plugins -->
+    <script src="static/assets/plugins/parallax/parallax.min.js"></script>
+    <script src="static/assets/plugins/flickity/flickity.pkgd.min.js"></script>
+    <script src="static/assets/plugins/lightbox/js/lightbox.min.js"></script>
+    <script src="static/assets/plugins/alerts/alerts.js"></script>
+
+    <!-- JS Custom -->
+    <script src="static/assets/js/theme.min.js"></script>
+    <script src="static/assets/js/custom.js"></script>
+
+</body>
+
+</html>
