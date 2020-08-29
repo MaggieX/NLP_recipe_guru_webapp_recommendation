@@ -218,6 +218,6 @@ def main_original():
 #  return render_template('404.html'), 404
 
 if __name__ == '__main__':
-  app.run(port=33507)
-  # app.debug = True
-  # app.run()
+  # app.run(port=33507)
+  app.debug = True
+  app.run()
