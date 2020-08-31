@@ -15,6 +15,8 @@ from scipy.sparse import coo_matrix
 # import flask_whooshalchemy as wa
 # from sqlalchemy import Column, Integer, String
 
+
+
 ############## Load Models & data ################
 # similarity matrix from bag of words
 # with open("model/top10_BoW_similarity.pickle", 'rb') as f:
@@ -47,7 +49,7 @@ ids_d2v = d2v_sim['ids']
 # This creates a base we can inheret from
 # Base = declarative_base()
 
-##################### Flask ######################                
+##################### Flask App Config ######################                
 
 app = Flask(__name__)
 port = int(os.environ.get("PORT", 5000))
@@ -55,7 +57,7 @@ port = int(os.environ.get("PORT", 5000))
 app.config['SECRET_KEY'] = 'the random string'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
-app.config['DEBUG'] = True
+# pp.config['DEBUG'] = True
 app.config['WHOODH_BASE'] = 'whoosh'
 
 # instantiate sqlalchemy
@@ -213,11 +215,17 @@ def custom():
 def main_original():
   return render_template('main_original.html')
 
+
 #@app.errorhandler(404)
 #def page_not_found(e):
 #  return render_template('404.html'), 404
 
+# toggle debug mode
+debug = False
+
 if __name__ == '__main__':
-  # app.run(port=33507)
-  app.debug = True
-  app.run()
+    if debug:
+      app.debug = True
+    else: 
+      app.debug = False
+    app.run(port=33507)
