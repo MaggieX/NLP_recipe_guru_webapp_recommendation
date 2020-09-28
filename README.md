@@ -2,7 +2,7 @@
 
 Check out the NLP (Natural Language Processing) -- based personalized recipe recommendation web app at: https://recipe-guru-rec.herokuapp.com.
 
-## About Me
+## About the Webapp
 This is my capstone project for the Data Incubator Fellowship. Voted by my cohort and selected to be presented at the San Francisco Pitch Night.
 
 “Recipe Guru” uses NLP technologies to recommend similar recipes to the ones one might like, currently based on 18000 recipes out of Recipe 1M+. Under the hood, this web app uses Recipe 1M+ data and natural language processing (NLP) models to recommend recipes based on the ones the user likes.
