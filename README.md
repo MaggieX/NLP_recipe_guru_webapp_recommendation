@@ -6,5 +6,5 @@ This is my capstone project for the Data Incubator Fellowship. Voted by my cohor
 
 Let me know if you have any feedback or suggestions :D
 
-<img src="http://g.recordit.co/euPhorRTob.gif" width=1000><br>
+<img src="http://g.recordit.co/euPhorRTob.gif" width=300><br>
 
