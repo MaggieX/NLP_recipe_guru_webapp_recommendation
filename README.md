@@ -6,5 +6,5 @@ This is my capstone project for the Data Incubator Fellowship. Voted by my cohor
 
 Let me know if you have any feedback or suggestions :D
 
-<img src="https://ezgif.com/resize/ezgif-4-26eb0aefed77.gif"><br>
+<img src="https://i.imgur.com/MbC6fvb.gif"><br>
 
